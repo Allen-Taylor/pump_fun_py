@@ -1,6 +1,6 @@
 Decided to share this with the world. 
 
-Add your Wallet Address, Private key and RPC to the Config.py.
+Add your Public Key (wallet), Private Key and RPC to the Config.py.
 
 Good luck!
 
