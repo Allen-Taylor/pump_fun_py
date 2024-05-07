@@ -41,7 +41,7 @@ def get_token_balance(base_mint: str):
         ui_amount = find_data(response.json(), "uiAmount")
         return float(ui_amount)
     except Exception as e:
-        return 0
+        return None
 
 def get_coin_data(mint_str):
     url = f"https://client-api-2-74b1891ee9f9.herokuapp.com/coins/{mint_str}"
