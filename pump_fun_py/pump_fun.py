@@ -221,7 +221,7 @@ def sell(mint_str, token_balance=None, slippage_percent=.5):
     except Exception as e:
         print(e)
 
-def buy_jito(mint_str, sol_in=0.1, slippage_percent=.5):
+def buy_jito(mint_str, sol_in=0.1, slippage_percent=.5, jito_fee=1_000_000):
     try:
         coin_data = None
         retry_count = 0
@@ -303,7 +303,7 @@ def buy_jito(mint_str, sol_in=0.1, slippage_percent=.5):
         print("Creating transaction instructions...")
         instructions = []
         tip_account = Pubkey.from_string('Cw8CFyM9FkoMi7K7Crf6HNQqf4uEMzpKw6QNghXLvLkY')
-        instructions.append(transfer(TransferParams(from_pubkey=payer_keypair.pubkey(), to_pubkey=tip_account, lamports=1_000_000)))
+        instructions.append(transfer(TransferParams(from_pubkey=payer_keypair.pubkey(), to_pubkey=tip_account, lamports=jito_fee)))
         instructions.append(set_compute_unit_price(UNIT_PRICE))
         instructions.append(set_compute_unit_limit(UNIT_BUDGET))
         if token_account_instructions:
@@ -331,7 +331,7 @@ def buy_jito(mint_str, sol_in=0.1, slippage_percent=.5):
     except Exception as e:
         print(e)
 
-def sell_jito(mint_str, token_balance=None, slippage_percent=.5):
+def sell_jito(mint_str, token_balance=None, slippage_percent=.5, jito_fee=1_000_000):
     try:
         # Main Execution
         coin_data = get_coin_data(mint_str)
@@ -398,7 +398,7 @@ def sell_jito(mint_str, token_balance=None, slippage_percent=.5):
         # Create transaction instructions
         instructions = []
         tip_account = Pubkey.from_string('Cw8CFyM9FkoMi7K7Crf6HNQqf4uEMzpKw6QNghXLvLkY')
-        instructions.append(transfer(TransferParams(from_pubkey=payer_keypair.pubkey(), to_pubkey=tip_account, lamports=1_000_000)))
+        instructions.append(transfer(TransferParams(from_pubkey=payer_keypair.pubkey(), to_pubkey=tip_account, lamports=jito_fee)))
         instructions.append(set_compute_unit_price(UNIT_PRICE))
         instructions.append(set_compute_unit_limit(UNIT_BUDGET))
         instructions.append(swap_instruction)
