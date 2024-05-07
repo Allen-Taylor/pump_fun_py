@@ -146,7 +146,7 @@ def sell(mint_str, token_balance=None, slippage_percent=.5):
 
         # Calculate token balance and minimum SOL output
         if token_balance == None:
-            token_balance = get_token_balance(str(mint))
+            token_balance = get_token_balance(mint_str)
         print("Token Balance:", token_balance)    
         min_sol_output = float(token_balance) * price_per
         slippage = 1 - slippage_percent
@@ -350,7 +350,7 @@ def sell_jito(mint_str, token_balance=None, slippage_percent=.5):
 
         # Calculate token balance and minimum SOL output
         if token_balance == None:
-            token_balance = get_token_balance(str(mint))
+            token_balance = get_token_balance(mint_str)
         print("Token Balance:", token_balance)    
         min_sol_output = float(token_balance) * price_per
         slippage = 1 - slippage_percent
