@@ -85,21 +85,3 @@ def confirm_txn(txn_sig, max_retries=20, retry_interval=3):
             time.sleep(retry_interval)
     print("Max retries reached. Transaction confirmation failed.")
     return None
-
-def send_transaction_jito(versioned_txn):
-    try:
-        serialized_transaction = base58.b58encode(bytes(versioned_txn)).decode('ascii')
-        url = "https://frankfurt.mainnet.block-engine.jito.wtf/api/v1/transactions"
-        headers = {"Content-Type": "application/json"}
-        payload = json.dumps({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "method": "sendTransaction",
-            "params": [serialized_transaction]
-        })
-        response = requests.post(url, headers=headers, data=payload)
-        txn_sig = response.json()['result']
-        return txn_sig
-    except Exception as e:
-        print(e)
-        return None
