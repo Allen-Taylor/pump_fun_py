@@ -220,7 +220,3 @@ def sell(mint_str, token_balance=None, slippage_percent=.5):
 
     except Exception as e:
         print(e)
-
-
-    except Exception as e:
-        print(e)
