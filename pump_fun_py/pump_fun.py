@@ -11,7 +11,6 @@ from config import payer_keypair, client
 from constants import *
 from solana.rpc.types import TokenAccountOpts
 from utils import get_coin_data, get_token_balance, confirm_txn
-from solders.transaction import VersionedTransaction #type: ignore
 from solana.rpc.types import TxOpts
 
 def buy(mint_str, sol_in=0.01, slippage_percent=.01):
