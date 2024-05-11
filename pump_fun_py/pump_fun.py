@@ -11,7 +11,6 @@ from config import payer_keypair, client
 from constants import *
 from solana.rpc.types import TokenAccountOpts
 from utils import get_coin_data, get_token_balance, confirm_txn
-from solders.system_program import TransferParams, transfer
 from solders.transaction import VersionedTransaction #type: ignore
 from solana.rpc.types import TxOpts
 
@@ -85,9 +84,6 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
             token_out,
             max_sol_cost
         ]
-
-        print(token_out)
-        print(max_sol_cost)
                 
         # Pack integers into binary segments
         binary_segments = [struct.pack('<Q', integer) for integer in integers]
@@ -102,7 +98,6 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
         if token_account_instructions:
             instructions.append(token_account_instructions)
         instructions.append(swap_instruction)
-
 
         # Compile message
         print("Compiling message...")
@@ -122,6 +117,7 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
         # Confirm transaction
         confirm = confirm_txn(txn_sig)
         print(confirm)
+        
     except Exception as e:
         print(e)
 
@@ -194,15 +190,12 @@ def sell(mint_str, token_balance=None, slippage_percent=.01):
         instructions.append(set_compute_unit_limit(UNIT_BUDGET))
         instructions.append(swap_instruction)
 
-        # Get latest blockhash
-        recent_blockhash = client.get_latest_blockhash()
-
         # Compile message
         compiled_message = MessageV0.try_compile(
             payer_keypair.pubkey(),
             instructions,
             [],  
-            recent_blockhash.value.blockhash,
+            client.get_latest_blockhash().value.blockhash,
         )
 
         # Create and send transaction
