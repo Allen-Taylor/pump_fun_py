@@ -13,8 +13,9 @@ from solana.rpc.types import TokenAccountOpts
 from utils import get_coin_data, get_token_balance, confirm_txn
 from solders.system_program import TransferParams, transfer
 from solders.transaction import VersionedTransaction #type: ignore
+from solana.rpc.types import TxOpts
 
-def buy(mint_str, sol_in=0.1, slippage_percent=.5):
+def buy(mint_str, sol_in=0.01, slippage_percent=.01):
     try:
         # Get coin data
         coin_data = None
@@ -112,22 +113,19 @@ def buy(mint_str, sol_in=0.1, slippage_percent=.5):
             client.get_latest_blockhash().value.blockhash,
         )
 
-        # Create transaction
+        # Create and send transaction
         print("Creating transaction...")
         transaction = VersionedTransaction(compiled_message, [payer_keypair])
-        
-        txn_sig = None
-        for _ in range(5):
-            txn_sig = client.send_transaction(transaction).value
-            time.sleep(.2)
+        txn_sig = client.send_transaction(transaction, opts=TxOpts(skip_preflight=True, preflight_commitment="confirmed")).value
         print(txn_sig)
         
+        # Confirm transaction
         confirm = confirm_txn(txn_sig)
         print(confirm)
     except Exception as e:
         print(e)
 
-def sell(mint_str, token_balance=None, slippage_percent=.5):
+def sell(mint_str, token_balance=None, slippage_percent=.01):
     try:
         # Main Execution
         coin_data = get_coin_data(mint_str)
@@ -207,14 +205,12 @@ def sell(mint_str, token_balance=None, slippage_percent=.5):
             recent_blockhash.value.blockhash,
         )
 
-        # Create transaction
+        # Create and send transaction
         transaction = VersionedTransaction(compiled_message, [payer_keypair])
-        txn_sig = None
-        for _ in range(5):
-            txn_sig = client.send_transaction(transaction).value
-            time.sleep(.2)
+        txn_sig = client.send_transaction(transaction, opts=TxOpts(skip_preflight=True, preflight_commitment="confirmed")).value
         print(txn_sig)
-        
+
+        # Confirm transaction
         confirm = confirm_txn(txn_sig)
         print(confirm)
 
