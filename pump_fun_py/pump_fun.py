@@ -132,16 +132,16 @@ def sell(mint_str, token_balance=None, slippage_percent=.01):
         decimal = int(client.get_account_info_json_parsed(mint).value.data.parsed['info']['decimals'])
 
         # Calculate price per Token in native SOL
-        virtual_sol_reserves = coin_data['virtual_sol_reserves']
-        virtual_token_reserves = coin_data['virtual_token_reserves']
-        price_per = (virtual_sol_reserves / virtual_token_reserves) / 1000
-        print(f"Price per Token: {price_per:.20f} SOL")
+        total_supply = coin_data['total_supply']
+        market_cap = coin_data['market_cap']
+        price_per_token = market_cap * (10**6) / total_supply
+        print(f"Price per Token: {price_per_token:.20f} SOL")
 
         # Calculate token balance and minimum SOL output
         if token_balance == None:
             token_balance = get_token_balance(mint_str)
         print("Token Balance:", token_balance)    
-        min_sol_output = float(token_balance) * price_per
+        min_sol_output = float(token_balance) * price_per_token
         slippage = 1 - slippage_percent
         min_sol_output = int((min_sol_output * slippage) * LAMPORTS_PER_SOL)  
         print("Min Sol Output:", min_sol_output)
