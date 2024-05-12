@@ -36,3 +36,28 @@ You get what you pay for. If you use the public RPC, you're going to get rekt. S
 **What format is slippage in?** 
 
 Slippage is in decimal format. Example: .05 slippage is 5%. 
+
+### Example
+
+```
+from pump_fun import buy
+
+#PUMP FUN MINT ADDRESS (NOT RAYDIUM)
+mint_str = "token_to_buy"
+
+#BUY
+buy(mint_str=mint_str, sol_in=.1, slippage_decimal=.25)
+
+```
+```
+from pump_fun import sell
+from utils import get_token_balance
+
+#PUMP FUN MINT ADDRESS (NOT RAYDIUM)
+mint_str = "token_to_sell"
+
+#SELL
+token_balance = get_token_balance()
+sell(mint_str=mint_str, token_balance=token_balance, slippage_decimal=.25)
+
+```
