@@ -112,6 +112,11 @@ def sell(mint_str, token_balance=None, slippage_decimal=.25):
     try:
         # Get coin data
         coin_data = get_coin_data(mint_str)
+        
+        if not coin_data:
+            print("Failed to retrieve coin data...")
+            return
+        
         owner = payer_keypair.pubkey()
         mint = Pubkey.from_string(mint_str)
 
@@ -129,6 +134,9 @@ def sell(mint_str, token_balance=None, slippage_decimal=.25):
         if token_balance == None:
             token_balance = get_token_balance(mint_str)
         print("Token Balance:", token_balance)    
+        
+        if token_balance == 0:
+            return
         
         min_sol_output = float(token_balance) * float(price_per_token)
         slippage = 1 - slippage_decimal
