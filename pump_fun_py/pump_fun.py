@@ -12,7 +12,7 @@ from solana.rpc.types import TokenAccountOpts
 from utils import get_coin_data, get_token_balance, confirm_txn
 from solana.rpc.types import TxOpts
 
-def buy(mint_str, sol_in=0.01, slippage_percent=.01):
+def buy(mint_str, sol_in=0.01, slippage_decimal=.25):
     try:
         # Get coin data
         coin_data = get_coin_data(mint_str)
@@ -41,7 +41,7 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
         token_out = int(sol_in_lamports * virtual_token_reserves / virtual_sol_reserves)
 
         # Calculate max_sol_cost and amount
-        sol_in_with_slippage = sol_in * (1 + slippage_percent)
+        sol_in_with_slippage = sol_in * (1 + slippage_decimal)
         max_sol_cost = int(sol_in_with_slippage * LAMPORTS_PER_SOL)  
 
         # Define account keys required for the swap
@@ -108,7 +108,7 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
     except Exception as e:
         print(e)
 
-def sell(mint_str, token_balance=None, slippage_percent=.01):
+def sell(mint_str, token_balance=None, slippage_decimal=.25):
     try:
         # Get coin data
         coin_data = get_coin_data(mint_str)
@@ -131,7 +131,7 @@ def sell(mint_str, token_balance=None, slippage_percent=.01):
         print("Token Balance:", token_balance)    
         
         min_sol_output = float(token_balance) * float(price_per_token)
-        slippage = 1 - slippage_percent
+        slippage = 1 - slippage_decimal
         min_sol_output = int((min_sol_output * slippage) * LAMPORTS_PER_SOL)  
         print("Min Sol Output:", min_sol_output)
         amount = int(token_balance * 10**decimal)
