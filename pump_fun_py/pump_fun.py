@@ -1,5 +1,4 @@
 import struct
-import time
 from solana.transaction import AccountMeta
 from spl.token.instructions import create_associated_token_account, get_associated_token_address
 from solders.pubkey import Pubkey #type: ignore
@@ -16,19 +15,11 @@ from solana.rpc.types import TxOpts
 def buy(mint_str, sol_in=0.01, slippage_percent=.01):
     try:
         # Get coin data
-        coin_data = None
-        retry_count = 0
-        while retry_count < 5:
-            coin_data = get_coin_data(mint_str)
-            if coin_data:
-                break
-            retry_count += 1
-            time.sleep(1)
-            print("No coin data yet.")
+        coin_data = get_coin_data(mint_str)
 
         if not coin_data:
-            print("Failed to retrieve coin data after 5 retries.")
-            return None
+            print("Failed to retrieve coin data...")
+            return
             
         owner = payer_keypair.pubkey()
         mint = Pubkey.from_string(mint_str)
@@ -90,7 +81,6 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
         swap_instruction = Instruction(PUMP_FUN_PROGRAM, data, keys)
 
         # Create transaction instructions
-        print("Creating transaction instructions...")
         instructions = []
         instructions.append(set_compute_unit_price(UNIT_PRICE))
         instructions.append(set_compute_unit_limit(UNIT_BUDGET))
@@ -99,7 +89,6 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
         instructions.append(swap_instruction)
 
         # Compile message
-        print("Compiling message...")
         compiled_message = MessageV0.try_compile(
             payer_keypair.pubkey(),
             instructions,
@@ -108,7 +97,6 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
         )
 
         # Create and send transaction
-        print("Creating transaction...")
         transaction = VersionedTransaction(compiled_message, [payer_keypair])
         txn_sig = client.send_transaction(transaction, opts=TxOpts(skip_preflight=True, preflight_commitment="confirmed")).value
         print(txn_sig)
@@ -122,7 +110,7 @@ def buy(mint_str, sol_in=0.01, slippage_percent=.01):
 
 def sell(mint_str, token_balance=None, slippage_percent=.01):
     try:
-        # Main Execution
+        # Get coin data
         coin_data = get_coin_data(mint_str)
         owner = payer_keypair.pubkey()
         mint = Pubkey.from_string(mint_str)
@@ -134,14 +122,15 @@ def sell(mint_str, token_balance=None, slippage_percent=.01):
         # Calculate price per Token in native SOL
         total_supply = coin_data['total_supply']
         market_cap = coin_data['market_cap']
-        price_per_token = market_cap * (10**6) / total_supply
+        price_per_token = market_cap * (10**decimal) / total_supply
         print(f"Price per Token: {price_per_token:.20f} SOL")
 
         # Calculate token balance and minimum SOL output
         if token_balance == None:
             token_balance = get_token_balance(mint_str)
         print("Token Balance:", token_balance)    
-        min_sol_output = float(token_balance) * price_per_token
+        
+        min_sol_output = float(token_balance) * float(price_per_token)
         slippage = 1 - slippage_percent
         min_sol_output = int((min_sol_output * slippage) * LAMPORTS_PER_SOL)  
         print("Min Sol Output:", min_sol_output)
