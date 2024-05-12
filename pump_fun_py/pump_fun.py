@@ -117,7 +117,7 @@ def sell(mint_str, token_balance=None, slippage_percent=.01):
 
         # Calculate token account
         token_account = get_associated_token_address(owner, mint)
-        decimal = int(client.get_account_info_json_parsed(mint).value.data.parsed['info']['decimals'])
+        decimal = 6
 
         # Calculate price per Token in native SOL
         total_supply = coin_data['total_supply']
