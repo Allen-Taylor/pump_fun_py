@@ -8,6 +8,8 @@ Decided to share my pump.fun codebase with the world because:
 
 Clone the repo, and add your Public Key (wallet), Private Key and RPC to the Config.py.
 
+Check out https://github.com/bilix-software/solana-pump-fun for a typescript version. 
+
 ### Swap Layout
 Do not change the hard-coded values as they are part of the actual swap instructions for the pump.fun program. 
 
