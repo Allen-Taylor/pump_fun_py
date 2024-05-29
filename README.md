@@ -21,9 +21,9 @@ To see for yourself, decode the "Instruction Raw Data" from any pump fun transac
 
 ### Contact
 
-Contact me if you need help integrating the code into your own project. 
+My services are for **hire**. Contact me if you need help integrating the code into your own project. 
 
-Telegram: Allen_A_Taylor (AL The Bot Father)
+Telegram: Allen_A_Taylor (AL THE BOT FATHER)
 
 ### FAQS
 
