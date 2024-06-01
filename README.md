@@ -1,10 +1,6 @@
 # pump_fun_py
 
-**UPDATE 6/1/2024:** 
-
-**Pump.Fun has implemented RECAPTCHA on their coin data endpoint.**
-
-**I found an alternative way to fetch the bonding curve, associated bonding curve and virtual token and sol reserves from the block chain directly to construct a transaction.**
+Python library to trade on pump.fun. 
 
 ### Swap Layout
 Do not change the hard-coded values as they are part of the actual swap instructions for the pump.fun program. 
