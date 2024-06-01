@@ -1,14 +1,8 @@
 # pump_fun_py
 
-Decided to share my pump.fun codebase with the world because: 
+**UPDATE 6/1/2024: Pump.Fun has implemented RECAPTCHA on their coin data endpoint.**
 
-1.) There are too many scammers out there on github and telegram.
-
-2.) The IDL for pump.fun isn't public information, but it should be. 
-
-Clone the repo, and add your Public Key (wallet), Private Key and RPC to the Config.py.
-
-Check out https://github.com/bilix-software/solana-pump-fun for a typescript version. 
+**I found an alternative way to fetch the bonding curve, associated bonding curve and virtual token and sol reserves from the block chain directly to construct a transaction.**
 
 ### Swap Layout
 Do not change the hard-coded values as they are part of the actual swap instructions for the pump.fun program. 
