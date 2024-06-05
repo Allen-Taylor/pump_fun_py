@@ -63,7 +63,7 @@ def buy(mint_str, sol_in=0.01, slippage_decimal=.25):
             AccountMeta(pubkey=SYSTEM_PROGRAM, is_signer=False, is_writable=False), 
             AccountMeta(pubkey=TOKEN_PROGRAM, is_signer=False, is_writable=False),
             AccountMeta(pubkey=RENT, is_signer=False, is_writable=False),
-            AccountMeta(pubkey=PUMP_FUN_ACCOUNT, is_signer=False, is_writable=False),
+            AccountMeta(pubkey=EVENT_AUTHORITY, is_signer=False, is_writable=False),
             AccountMeta(pubkey=PUMP_FUN_PROGRAM, is_signer=False, is_writable=False)
         ]
 
@@ -163,7 +163,7 @@ def sell(mint_str, token_balance=None, slippage_decimal=.25):
             AccountMeta(pubkey=SYSTEM_PROGRAM, is_signer=False, is_writable=False), 
             AccountMeta(pubkey=ASSOC_TOKEN_ACC_PROG, is_signer=False, is_writable=False),
             AccountMeta(pubkey=TOKEN_PROGRAM, is_signer=False, is_writable=False),
-            AccountMeta(pubkey=PUMP_FUN_ACCOUNT, is_signer=False, is_writable=False),
+            AccountMeta(pubkey=EVENT_AUTHORITY, is_signer=False, is_writable),
             AccountMeta(pubkey=PUMP_FUN_PROGRAM, is_signer=False, is_writable=False)
         ]
 
