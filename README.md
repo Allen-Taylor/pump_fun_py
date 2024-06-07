@@ -2,7 +2,12 @@
 
 Python library to trade on pump.fun. 
 
+### Update
+
+UPDATE 6/7/2024: https://frontend-api.pump.fun is the new token endpoint. 
+
 ### Swap Layout
+
 Do not change the hard-coded values as they are part of the actual swap instructions for the pump.fun program. 
 
 **buy = 16927863322537952870**
