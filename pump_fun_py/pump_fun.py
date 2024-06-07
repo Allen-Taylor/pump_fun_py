@@ -20,6 +20,10 @@ def buy(mint_str, sol_in=0.01, slippage_decimal=.25):
         if not coin_data:
             print("Failed to retrieve coin data...")
             return
+
+        if slippage_decimal > 1:
+            print("Slippage decimal must be less that 1 (100%).")
+            return
             
         owner = payer_keypair.pubkey()
         mint = Pubkey.from_string(mint_str)
@@ -117,17 +121,20 @@ def sell(mint_str, token_balance=None, slippage_decimal=.25):
             print("Failed to retrieve coin data...")
             return
         
+        if slippage_decimal > 1:
+            print("Slippage decimal must be less that 1 (100%).")
+            return
+        
         owner = payer_keypair.pubkey()
         mint = Pubkey.from_string(mint_str)
 
         # Calculate token account
         token_account = get_associated_token_address(owner, mint)
-        decimal = 6
-
+        
         # Calculate price per Token in native SOL
-        total_supply = coin_data['total_supply']
-        market_cap = coin_data['market_cap']
-        price_per_token = market_cap * (10**decimal) / total_supply
+        virtual_sol_reserves = coin_data['virtual_sol_reserves'] / 10**9
+        virtual_token_reserves = coin_data['virtual_token_reserves'] / 10**6
+        price_per_token = virtual_sol_reserves / virtual_token_reserves
         print(f"Price per Token: {price_per_token:.20f} SOL")
 
         # Calculate token balance and minimum SOL output
@@ -136,14 +143,16 @@ def sell(mint_str, token_balance=None, slippage_decimal=.25):
         print("Token Balance:", token_balance)    
         
         if token_balance == 0:
+            print("This wallet has 0 tokens to sell.")
             return
+        
+        amount = int(token_balance * 10**6)
         
         min_sol_output = float(token_balance) * float(price_per_token)
         slippage = 1 - slippage_decimal
         min_sol_output = int((min_sol_output * slippage) * LAMPORTS_PER_SOL)  
         print("Min Sol Output:", min_sol_output)
-        amount = int(token_balance * 10**decimal)
-
+        
         # Define account keys required for the swap
         MINT = Pubkey.from_string(coin_data['mint'])
         BONDING_CURVE = Pubkey.from_string(coin_data['bonding_curve'])
@@ -163,7 +172,7 @@ def sell(mint_str, token_balance=None, slippage_decimal=.25):
             AccountMeta(pubkey=SYSTEM_PROGRAM, is_signer=False, is_writable=False), 
             AccountMeta(pubkey=ASSOC_TOKEN_ACC_PROG, is_signer=False, is_writable=False),
             AccountMeta(pubkey=TOKEN_PROGRAM, is_signer=False, is_writable=False),
-            AccountMeta(pubkey=EVENT_AUTHORITY, is_signer=False, is_writable),
+            AccountMeta(pubkey=EVENT_AUTHORITY, is_signer=False, is_writable=False),
             AccountMeta(pubkey=PUMP_FUN_PROGRAM, is_signer=False, is_writable=False)
         ]
 
