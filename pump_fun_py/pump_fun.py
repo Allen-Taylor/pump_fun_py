@@ -22,7 +22,7 @@ def buy(mint_str, sol_in=0.01, slippage_decimal=.25):
             return
 
         if slippage_decimal > 1:
-            print("Slippage decimal must be less that 1 (100%).")
+            print("Slippage decimal must be less than 1 (100%).")
             return
             
         owner = payer_keypair.pubkey()
@@ -122,7 +122,7 @@ def sell(mint_str, token_balance=None, slippage_decimal=.25):
             return
         
         if slippage_decimal > 1:
-            print("Slippage decimal must be less that 1 (100%).")
+            print("Slippage decimal must be less than 1 (100%).")
             return
         
         owner = payer_keypair.pubkey()
