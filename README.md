@@ -4,7 +4,7 @@ Python library to trade on pump.fun.
 
 ### Update
 
-UPDATE 6/7/2024: https://frontend-api.pump.fun is the new token endpoint. 
+UPDATE 6/7/2024: https://frontend-api.pump.fun/coins/ is the new token endpoint. 
 
 ### Swap Layout
 
