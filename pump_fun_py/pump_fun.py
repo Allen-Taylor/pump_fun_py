@@ -72,9 +72,9 @@ def buy(mint_str, sol_in=0.01, slippage_decimal=.25):
         ]
 
         # Define integer values
-        buy = 16927863322537952870
+        discriminator_as_int = 16927863322537952870
         integers = [
-            buy,
+            discriminator_as_int,
             token_out,
             max_sol_cost
         ]
@@ -177,9 +177,9 @@ def sell(mint_str, token_balance=None, slippage_decimal=.25):
         ]
 
         # Define integer values
-        sell = 12502976635542562355
+        discriminator_as_int = 12502976635542562355
         integers = [
-            sell,
+            discriminator_as_int,
             amount,
             min_sol_output
         ]
