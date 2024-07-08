@@ -8,9 +8,9 @@ Python library to trade on pump.fun.
 
 Do not change the hard-coded values as they are part of the actual swap instructions for the pump.fun program. 
 
-**buy = 16927863322537952870**
+**discriminator_as_int = 16927863322537952870**
 
-**sell = 12502976635542562355**
+**discriminator_as_int = 12502976635542562355**
 
 To see for yourself, decode the "Instruction Raw Data" from any pump fun transaction using the find_instruction.py. 
 
