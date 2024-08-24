@@ -29,16 +29,19 @@ You get what you pay for. If you use the public RPC, you're going to get rekt. S
 ```
 from pump_fun import buy
 
-#BUY
-buy(mint_str="token_to_buy", sol_in=.1, slippage=25)
+#Buy Example
+mint_str = "token_to_buy"
+buy(mint_str=mint_str, sol_in=.1, slippage=25)
 
 ```
 ```
 from pump_fun import sell
 from utils import get_token_balance
 
-#SELL
+# Sell Example
 mint_str = "token_to_sell"
 token_balance = get_token_balance(mint_str)
+
+# Note: If you are selling your entire token balance, set close_token_account to True, otherwise set it to False. 
 sell(mint_str=mint_str, token_balance=token_balance, slippage=25, close_token_account=True)
 ```
