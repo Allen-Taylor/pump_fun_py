@@ -29,7 +29,7 @@ You get what you pay for. Don't use the main-net RPC, just spend the money for H
 ```
 from pump_fun import buy
 
-#Buy Example
+# Buy Example
 mint_str = "token_to_buy"
 buy(mint_str=mint_str, sol_in=.1, slippage=25)
 
