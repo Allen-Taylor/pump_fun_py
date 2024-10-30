@@ -91,6 +91,7 @@ def buy(mint_str: str, sol_in: float = 0.01, slippage: int = 25) -> bool:
         print("Signing and sending transaction...")
         txn.sign(payer_keypair)
         txn_sig = client.send_transaction(txn, payer_keypair, opts=TxOpts(skip_preflight=True)).value
+        #txn_sig = client.send_legacy_transaction(txn, payer_keypair, opts=TxOpts(skip_preflight=True)).value
         print("Transaction Signature:", txn_sig)
 
         print("Confirming transaction...")
@@ -189,6 +190,7 @@ def sell(mint_str: str, percentage: int = 100, slippage: int = 25, close_token_a
         print("Signing and sending transaction...")
         txn.sign(payer_keypair)
         txn_sig = client.send_transaction(txn, payer_keypair, opts=TxOpts(skip_preflight=True)).value
+        #txn_sig = client.send_legacy_transaction(txn, payer_keypair, opts=TxOpts(skip_preflight=True)).value
         print("Transaction Signature:", txn_sig)
 
         print("Confirming transaction...")
