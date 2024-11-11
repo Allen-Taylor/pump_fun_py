@@ -14,6 +14,8 @@ If you are using the new version of solana-py, use **send_legacy_transaction()**
 
 My services are for **hire**. Contact me if you need help integrating the code into your own project. 
 
+I am not your personal tech support. READ THE FAQS. 
+
 Telegram: @AL_THE_BOT_FATHER
 
 ### FAQS
