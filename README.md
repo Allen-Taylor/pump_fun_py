@@ -32,6 +32,10 @@ You get what you pay for. Don't use the main-net RPC, just spend the money for H
 
 Modify the UNIT_BUDGET and UNIT_PRICE in the config.py. 
 
+**Does this code work on devnet?**
+
+No. 
+
 ### Example
 
 ```
