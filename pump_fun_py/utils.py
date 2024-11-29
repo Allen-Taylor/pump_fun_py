@@ -1,6 +1,6 @@
 import json
 import time
-from solana.rpc.commitment import Processed
+from solana.rpc.commitment import Processed, Confirmed
 from solana.rpc.types import TokenAccountOpts
 from solana.transaction import Signature
 from solders.pubkey import Pubkey  # type: ignore
@@ -31,7 +31,7 @@ def confirm_txn(txn_sig: Signature, max_retries: int = 20, retry_interval: int =
     
     while retries < max_retries:
         try:
-            txn_res = client.get_transaction(txn_sig, encoding="json", commitment="confirmed", max_supported_transaction_version=0)
+            txn_res = client.get_transaction(txn_sig, encoding="json", commitment=Confirmed, max_supported_transaction_version=0)
             txn_json = json.loads(txn_res.value.transaction.meta.to_json())
             
             if txn_json['err'] is None:
