@@ -2,11 +2,9 @@
 
 Python library to trade on pump.fun. 
 
-Updated: 10/30/2024
+Updated: 11/29/2024 - Changed to versioned TXNs since so many of you were having issues with "legacy". 
 
 Clone the repo, and add your Private Key (Base58 string) and RPC to the config.py.
-
-If you are using the new version of solana-py, use **send_legacy_transaction()** instead of **send_transaction()**. 
 
 **If you can - please support my work and donate to: 3pPK76GL5ChVFBHND54UfBMtg36Bsh1mzbQPTbcK89PD**
 
