@@ -58,8 +58,8 @@ def get_token_price(mint_str: str) -> float:
             print("Failed to retrieve coin data...")
             return None
         
-        virtual_sol_reserves = coin_data['virtual_sol_reserves'] / 10**9
-        virtual_token_reserves = coin_data['virtual_token_reserves'] / 10**6
+        virtual_sol_reserves = coin_data.virtual_sol_reserves / 10**9
+        virtual_token_reserves = coin_data.virtual_token_reserves / 10**6
 
         token_price = virtual_sol_reserves / virtual_token_reserves
         print(f"Token Price: {token_price:.20f} SOL")
