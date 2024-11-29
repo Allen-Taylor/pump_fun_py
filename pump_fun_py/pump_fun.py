@@ -39,7 +39,7 @@ def buy(mint_str: str, sol_in: float = 0.01, slippage: int = 15) -> bool:
         except:
             ASSOCIATED_USER = get_associated_token_address(USER, MINT)
             token_account_instruction = create_associated_token_account(USER, USER, MINT)
-            print(f"Creating token account : {ASSOCIATED_USER}")
+            print(f"Creating token account: {ASSOCIATED_USER}")
 
         print("Calculating transaction amounts...")
         virtual_sol_reserves = coin_data.virtual_sol_reserves
