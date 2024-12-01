@@ -26,6 +26,10 @@ def buy(mint_str: str, sol_in: float = 0.01, slippage: int = 15) -> bool:
             print("Failed to retrieve coin data.")
             return False
 
+        if coin_data.complete:
+            print("Warning: This token has bonded and is only tradable on Raydium.")
+            return
+
         MINT = coin_data.mint
         BONDING_CURVE = coin_data.bonding_curve
         ASSOCIATED_BONDING_CURVE = coin_data.associated_bonding_curve
@@ -39,7 +43,7 @@ def buy(mint_str: str, sol_in: float = 0.01, slippage: int = 15) -> bool:
         except:
             ASSOCIATED_USER = get_associated_token_address(USER, MINT)
             token_account_instruction = create_associated_token_account(USER, USER, MINT)
-            print(f"Creating token account: {ASSOCIATED_USER}")
+            print(f"Creating token account : {ASSOCIATED_USER}")
 
         print("Calculating transaction amounts...")
         virtual_sol_reserves = coin_data.virtual_sol_reserves
@@ -118,6 +122,10 @@ def sell(mint_str: str, percentage: int = 100, slippage: int = 15) -> bool:
         if not coin_data:
             print("Failed to retrieve coin data.")
             return False
+
+        if coin_data.complete:
+            print("Warning: This token has bonded and is only tradable on Raydium.")
+            return
 
         MINT = coin_data.mint
         BONDING_CURVE = coin_data.bonding_curve
