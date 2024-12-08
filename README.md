@@ -46,7 +46,7 @@ from pump_fun import buy
 # Buy Example
 mint_str = "pump_token_address"
 sol_in = .1
-slippage = 25
+slippage = 5
 buy(mint_str, sol_in, slippage)
 ```
 
@@ -56,6 +56,6 @@ from pump_fun import sell
 # Sell Example
 mint_str = "pump_token_address"
 percentage = 100
-slippage = 25
+slippage = 5
 sell(mint_str, percentage, slippage)
 ```
