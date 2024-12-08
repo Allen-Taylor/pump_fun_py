@@ -2,7 +2,7 @@
 
 Python library to trade on pump.fun. 
 
-Updated: 11/29/2024 - Changed to versioned TXNs since so many of you were having issues with "legacy". 
+Updated: 12/8/2024 - Changed to versioned TXNs since so many of you were having issues with "legacy". 
 
 Clone the repo, and add your Private Key (Base58 string) and RPC to the config.py.
 
