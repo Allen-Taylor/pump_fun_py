@@ -74,7 +74,7 @@ def sol_for_tokens(sol_spent, sol_reserves, token_reserves):
     new_sol_reserves = sol_reserves + sol_spent
     new_token_reserves = (sol_reserves * token_reserves) / new_sol_reserves
     token_received = token_reserves - new_token_reserves
-    return token_received
+    return round(token_received)
 
 def tokens_for_sol(tokens_to_sell, sol_reserves, token_reserves):
     new_token_reserves = token_reserves + tokens_to_sell
