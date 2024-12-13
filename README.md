@@ -10,13 +10,15 @@ Clone the repo, and add your Private Key (Base58 string) and RPC to the config.p
 
 ### Contact
 
-My services are for **hire**. 
+My services are for **hire**. Contact me if you need help integrating the code into your own project. 
 
-Contact me if you need help integrating the code into your own project. 
+-PF Token Launchers (Bundler or Self-Sniper)
+-Bump Bot
+-gRPC Detection (Mints, Buys, Migrations)
+-Vanity Address Generator
+-Rust implementations of PF code
 
-I am not your personal tech support. 
-
-READ THE FAQS BEFORE CONTACTING ME. 
+I am not your personal tech support. READ THE FAQS BEFORE CONTACTING ME. 
 
 Telegram: @AL_THE_BOT_FATHER
 
